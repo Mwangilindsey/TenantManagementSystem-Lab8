@@ -1,12 +1,12 @@
-package com.example.tenantmanagementsystem
+package com.example.tenantmanagementsystem.ui.auth
 
-import android.util.Log
-import android.net.Uri
 import android.content.Intent
-import android.net.Uri.parse
+import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.tenantmanagementsystem.ui.main.MainActivity
 import com.example.tenantmanagementsystem.databinding.ActivityLoginBinding
 
 class LoginActivity : AppCompatActivity() {
@@ -59,7 +59,7 @@ class LoginActivity : AppCompatActivity() {
 
             val intent = Intent(
                 Intent.ACTION_VIEW,
-                parse("https://www.strathmore.edu")
+                Uri.parse("https://www.strathmore.edu")
             )
 
             startActivity(intent)
@@ -69,7 +69,7 @@ class LoginActivity : AppCompatActivity() {
         binding.helpTextView.setOnClickListener {
             val intent = Intent(
                 Intent.ACTION_VIEW,
-                parse("https://www.strathmore.edu")
+                Uri.parse("https://www.strathmore.edu")
             )
 
             startActivity(intent)
@@ -101,11 +101,3 @@ class LoginActivity : AppCompatActivity() {
         Log.d("Lifecycle", "LoginActivity: onDestroy")
     }
 }
-
-
-
-
-
-
-
-
