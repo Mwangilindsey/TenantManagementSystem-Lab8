@@ -65,6 +65,12 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
 
+                R.id.dashboardFragment -> {
+                    navController.popBackStack(R.id.dashboardFragment, false)
+                    binding.drawerLayout.closeDrawers()
+                    true
+                }
+
                 else -> {
                     val handled = item.onNavDestinationSelected(navController)
                     binding.drawerLayout.closeDrawers()
