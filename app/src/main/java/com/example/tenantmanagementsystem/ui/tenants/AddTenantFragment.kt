@@ -6,11 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.example.tenantmanagementsystem.ui.tenants.AddTenantFragmentDirections
-import com.example.tenantmanagementsystem.data.model.Tenant
-import com.example.tenantmanagementsystem.data.repository.TenantRepository
+import com.example.tenantmanagementsystem.ui.viewmodel.TenantViewModel
 import com.example.tenantmanagementsystem.databinding.FragmentAddTenantBinding
 
 class AddTenantFragment : Fragment() {
@@ -29,6 +28,8 @@ class AddTenantFragment : Fragment() {
         Log.d("TENANT_LIFECYCLE", "AddTenantFragment: onCreateView")
         return binding.root
     }
+
+    private val viewModel: TenantViewModel by activityViewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -54,9 +55,16 @@ class AddTenantFragment : Fragment() {
                 return@setOnClickListener
             }
 
-            val tenant = Tenant(name, phone, rent)
+            val tenant = viewModel.addTenant(
+                binding.tenantNameEditText.text.toString(),
+                binding.phoneEditText.text.toString(),
+                binding.rentEditText.text.toString()
+            )
 
-            TenantRepository.addTenant(tenant)
+            if (tenant == null) {
+                Toast.makeText(requireContext(), "Please fill in all fields", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
 
             val action =
                 AddTenantFragmentDirections
